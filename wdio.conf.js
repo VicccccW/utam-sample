@@ -1,5 +1,4 @@
-import { UtamWdioService } from 'wdio-utam-service';
-import 'dotenv/config';
+const { UtamWdioService } = require('wdio-utam-service');
 
 exports.config = {
   //
@@ -64,11 +63,7 @@ exports.config = {
   // NPM script (see https://docs.npmjs.com/cli/run-script) then the current working
   // directory is where your package.json resides, so `wdio` will be called from there.
   //
-  //specs: ["./build/src/test/*.js"],
-  specs: ['./build/tests/*.spec.js'],
-  /*suites: {
-    loginUtam: ["./build/src/test/*.js"]
-  },*/
+  specs: ['./src/tests/updateField.spec.ts'],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -89,7 +84,7 @@ exports.config = {
   // and 30 processes will get spawned. The property handles how many capabilities
   // from the same test should run tests.
   //
-  maxInstances: 2,
+  maxInstances: 1,
   //
   // If you have trouble getting all important capabilities together, check out the
   // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -100,7 +95,7 @@ exports.config = {
       // maxInstances can get overwritten per capability. So if you have an in-house Selenium
       // grid with only 5 firefox instances available you can make sure that not more than
       // 5 instances get started at a time.
-      maxInstances: 2,
+      maxInstances: 1,
       //
       browserName: 'chrome',
       pageLoadStrategy: 'normal',
@@ -108,7 +103,7 @@ exports.config = {
         // to run chrome headless the following flags are required
         // (see https://developers.google.com/web/updates/2017/04/headless-chrome)
         args: [
-          '--headless',
+          // '--headless',
           '--disable-gpu',
           '--no-sandbox',
           '--disable-infobars',
@@ -160,7 +155,7 @@ exports.config = {
   baseUrl: process.env.SALESFORCE_LOGIN_URL,
   //
   // Default timeout for all waitFor* commands.
-  waitforTimeout: 10000,
+  waitforTimeout: 30000,
   //
   // optional parameter that sets the polling interval for explicit waits
   waitforInterval: 200,
@@ -188,7 +183,7 @@ exports.config = {
 
   // WebDriverIO doesn't allow setting an implicit timeout through config
   // so we set it via UtamWdioService parameters
-  services: ['chromedriver', ['UtamWdioService', {}]],
+  services: ['chromedriver', [UtamWdioService, {}]],
 
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber
@@ -207,15 +202,7 @@ exports.config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter.html
-  reporters: [
-    [
-      'allure',
-      {
-        outputDir: 'allure-results',
-        disableWebdriverScreenshotsReporting: false,
-      },
-    ],
-  ],
+  reporters: [],
 
   outputDir: './all-logs',
   automationProtocol: 'webdriver',
@@ -271,7 +258,10 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  before: function (capabilities, specs) {},
+  before: function (capabilities, specs) {
+    require('@babel/register');
+  },
+
   /**
    * Runs before a WebdriverIO command gets executed.
    * @param {String} commandName hook command name

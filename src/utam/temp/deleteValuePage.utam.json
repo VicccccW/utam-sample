@@ -1,0 +1,37 @@
+{
+  "root": true,
+  "selector": {
+    "css": "body"
+  },
+  "elements": [
+    {
+      "name": "blankValueRadio",
+      "selector": {
+        "css": ".radioGroup li:nth-of-type(2) input"
+      },
+      "type": "clickable"
+    },
+    {
+      "name": "saveButton",
+      "selector": {
+        "css": "[title='Save']"
+      },
+      "type": "clickable"
+    }
+  ],
+  "methods": [
+    {
+      "name": "selectBlankValueAndSave",
+      "compose": [
+        {
+          "element": "blankValueRadio",
+          "apply": "click"
+        },
+        {
+          "element": "saveButton",
+          "apply": "click"
+        }
+      ]
+    }
+  ]
+}

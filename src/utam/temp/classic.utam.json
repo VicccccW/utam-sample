@@ -1,0 +1,122 @@
+{
+  "root": true,
+  "selector": {
+    "css": "body"
+  },
+  "beforeLoad": [
+    {
+      "apply": "waitFor",
+      "args": [
+        {
+          "type": "function",
+          "predicate": [
+            {
+              "element": "root",
+              "apply": "isVisible"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "elements": [
+    {
+      "name": "setupLink",
+      "selector": {
+        "css": "[title='Setup']"
+      },
+      "type": "clickable"
+    },
+    {
+      "name": "quickSearch",
+      "selector": {
+        "css": "[title='Quick Find / Search...']"
+      },
+      "type": ["clickable", "editable"]
+    },
+    {
+      "name": "productFieldsSetup",
+      "selector": {
+        "css": "[id='Product2Fields_font']"
+      },
+      "type": "clickable"
+    },
+    {
+      "name": "productTypeFieldLink",
+      "selector": {
+        "css": "[id='CustomFieldRelatedList_body'] tr.dataRow:nth-of-type(2) th.dataCell a"
+      },
+      "type": "clickable"
+    },
+    {
+      "name": "productTypeValueByLabel",
+      "selector": {
+        "css": "[id='ValidationFormulaList'] + .bRelatedList .pbBody .dataRow",
+        "returnAll": true
+      },
+      "filter": {
+        "apply": "getLabel",
+        "matcher": {
+          "type": "stringEquals",
+          "args": [
+            {
+              "name": "text",
+              "type": "string"
+            }
+          ]
+        },
+        "findFirst": true
+      },
+      "type": "custom-utam-temp/pageObjects/fieldValue",
+      "public": true
+    }
+  ],
+  "methods": [
+    {
+      "name": "openClassicSetup",
+      "compose": [
+        {
+          "element": "setupLink",
+          "apply": "click"
+        }
+      ]
+    },
+    {
+      "name": "searchClassicSetup",
+      "compose": [
+        {
+          "element": "quickSearch",
+          "apply": "click"
+        },
+        {
+          "element": "quickSearch",
+          "apply": "clearAndType",
+          "args": [
+            {
+              "name": "searchTerm",
+              "type": "string"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "openProductFieldsSetup",
+      "compose": [
+        {
+          "element": "productFieldsSetup",
+          "apply": "click"
+        }
+      ]
+    },
+    {
+      "name": "openProductTypeField",
+      "compose": [
+        {
+          "element": "productTypeFieldLink",
+          "apply": "click"
+        }
+      ]
+    }
+  ]
+}

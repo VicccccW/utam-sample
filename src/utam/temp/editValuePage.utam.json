@@ -1,0 +1,86 @@
+{
+  "root": true,
+  "selector": {
+    "css": "body"
+  },
+  "elements": [
+    {
+      "name": "detailList",
+      "selector": {
+        "css": ".detailList"
+      },
+      "elements": [
+        {
+          "name": "labelInput",
+          "selector": {
+            "css": "tr:nth-of-type(2) input"
+          },
+          "type": ["clickable", "editable"]
+        },
+        {
+          "name": "apiNameInput",
+          "selector": {
+            "css": "tr:nth-of-type(3) input"
+          },
+          "type": ["clickable", "editable"]
+        }
+      ]
+    },
+    {
+      "name": "saveButton",
+      "selector": {
+        "css": "[title='Save']"
+      },
+      "type": ["clickable"]
+    }
+  ],
+  "methods": [
+    {
+      "name": "setLabel",
+      "compose": [
+        {
+          "element": "labelInput",
+          "apply": "click"
+        },
+        {
+          "element": "labelInput",
+          "apply": "clearAndType",
+          "args": [
+            {
+              "name": "newLabel",
+              "type": "string"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "setApiName",
+      "compose": [
+        {
+          "element": "apiNameInput",
+          "apply": "click"
+        },
+        {
+          "element": "apiNameInput",
+          "apply": "clearAndType",
+          "args": [
+            {
+              "name": "newApiName",
+              "type": "string"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "save",
+      "compose": [
+        {
+          "element": "saveButton",
+          "apply": "click"
+        }
+      ]
+    }
+  ]
+}
