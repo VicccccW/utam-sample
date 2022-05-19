@@ -2,3 +2,4 @@ node_modules/
 all-logs/
 allure-results/
 build/
+pageObjects/

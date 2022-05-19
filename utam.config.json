@@ -1,7 +1,7 @@
 {
   "pageObjectsRootDir": "./",
   "pageObjectsFileMask": ["src/utam/**/*.utam.json"],
-  "pageObjectsOutputDir": "build/pageObjects",
+  "pageObjectsOutputDir": "pageObjects",
   "alias": {
     "salesforce-pageobjects/": "salesforce-pageobjects/dist/",
     "anzx-utam-*/": "./../",
